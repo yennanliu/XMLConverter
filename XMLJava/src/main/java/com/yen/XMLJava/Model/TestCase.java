@@ -1,8 +1,8 @@
-package com.yen.XMLJava;
+package com.yen.XMLJava.Model;
 
 public class TestCase {
-    public String input;
-    public boolean expectedOutput;
+    public final String input;
+    public final boolean expectedOutput;
 
     public TestCase(String input, boolean expectedOutput) {
         this.input = input;
