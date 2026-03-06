@@ -5,9 +5,9 @@ import java.util.Deque;
 
 public class SimpleXmlValidator {
 
-    public static String determineXml(String xml) {
+    public static boolean determineXml(String xml) {
         if (xml == null || xml.isEmpty()) {
-            return "Valid";
+            return true;
         }
 
         Deque<String> stack = new ArrayDeque<>();
@@ -17,18 +17,18 @@ public class SimpleXmlValidator {
             if (xml.charAt(i) == '<') {
                 int closeIndex = findClosingBracket(xml, i);
                 if (closeIndex == -1) {
-                    return "Invalid";
+                    return false;
                 }
 
                 String tagContent = xml.substring(i + 1, closeIndex);
                 if (tagContent.isEmpty()) {
-                    return "Invalid";
+                    return false;
                 }
 
                 if (tagContent.charAt(0) == '/') {
                     String tagName = tagContent.substring(1);
                     if (stack.isEmpty() || !stack.pop().equals(tagName)) {
-                        return "Invalid";
+                        return false;
                     }
                 } else {
                     stack.push(tagContent);
@@ -40,7 +40,7 @@ public class SimpleXmlValidator {
             }
         }
 
-        return stack.isEmpty() ? "Valid" : "Invalid";
+        return stack.isEmpty();
     }
 
     private static int findClosingBracket(String xml, int start) {
