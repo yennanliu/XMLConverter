@@ -1,0 +1,85 @@
+# Take home coding test (XML)
+
+***Create a console application with the following specifications (see the templates below to get a better idea of what the project looks like):***
+
+- Input: an XML string
+    - The XML string should be passed as the first command line argument.
+- Output: `Valid` if given XML is valid, otherwise `Invalid` with a new line
+    - Use standard output.
+
+A string is a valid XML string if it satisfies the following two rules:
+
+- Each opening tag must have a corresponding closing tag, which means each closing tag also must have a corresponding opening tag
+- Tags must be well nested, which means that the tag which starts first must end last. For example, `<tutorial><topic>XML</topic></tutorial>` is considered correct, while `<tutorial><topic>XML</tutorial></topic>` is not.
+
+To simplify the question, we treat a pair of an opening tag and a closing tag as matched only if the strings in both tags are identical. 
+So we don’t need to parse extra components like attributes in the XML tag. For example, we treat`<tutorial date="01/01/2000">XML</tutorial>` as not correctly closed since the string `tutorial date=”01/01/2000”` in the opening tag is different from the string **tutorial** in the closing tag `</tutorial>`. 
+Based on this rule, we can treat `<tutorial date="01/01/2000">XML</tutorial date="01/01/2000">` as correctly closed.
+
+Note that any class in `System.XML` or other XML libraries and `Regular Expression` are **prohibited** in this question.
+
+## Examples of using the executable
+
+Name the executable file `checker.exe` for example (same below)
+
+Example 1: 
+
+```
+> checker.exe "<Design><Code>hello world</Code></Design>"
+Valid
+```
+
+Example 2:
+
+```
+> checker.exe "<Design><Code>hello world</Code></Design><People>"
+Invalid
+```
+
+Example 3:
+
+```
+> checker.exe "<People><Design><Code>hello world</People></Code></Design>"
+Invalid
+```
+
+Example 4:
+
+```
+> checker.exe "<People age=”1”>hello world</People>"
+Invalid
+```
+
+Inputs are not limited to these examples and could be anything. Please keep in mind that your code should be a quality that's good enough for professional developers to continue working on.
+
+If there are some cases that you don’t know if they can be considered as valid XML strings or not, you can either ask us or you can define the expected outputs for those cases. But please add explanations about those cases in the document or code.
+
+## Note
+
+- Please add a pull request description-like document about your code and work.
+- Be mindful that your code should be a quality that's good enough for professional developers to continue working on.
+- Don’t over-engineer your solution. We’re looking code which is functional, efficient, and solves the problem.
+
+## Deliverable
+
+- A console application project.
+    - Preferred languages: C#, C++, Java, Rust
+    - Built binaries are not needed.
+- Pull request description-like document (Markdown)
+
+Zip everything with your full name (for example, `BoostDraftCodingAssignment_JohnSmith.zip` or `BoostDraftCodingAssignmentByTemplate_JohnSmith.zip` if you use the template above) and send it to us!
+
+**Note**: your zip file might **be blocked by the mailing system** if you include executables (e.g. .exe), so please delete such executables if you have trouble sending your work
+
+## Templates for this project
+
+You can try to start this assignment with the following templates. Using this template is encouraged but not mandatory.
+
+- C# (Visual Studio 2022) https://drive.google.com/file/d/1-Pp-cvVTQIjbMNCkfV9kaCndjubBESGA/view?usp=sharing 
+(you can just implement `SimpleXmlValidator.DetermineXml` and test it in `Program.Main` )
+- C++ (CMake)  https://drive.google.com/file/d/1yA2LJTv-Dw05AHBYv8sotUi9QloN56pL/view?usp=sharing 
+(you can just implement `DetermineXml` and use `checker.cpp` as unit test to test it)
+- Rust https://drive.google.com/file/d/1X2cyKrkkPcN1qIuR1lvhYGmstL9uRwQ3/view?usp=sharing 
+(you can just implement `determine_xml` and test it with `mod tests`)
+- Java https://drive.google.com/file/d/1LzRhxT7hydfFkPllpvZ902Hup6tWzbyv/view?usp=sharing 
+(You just need to implement **`SimpleXmlValidator.determineXml`** and test it in the **`main()`** method.  You don't really need to make the build to print "**Valid**" or "**Invalid**")
